@@ -8,8 +8,10 @@
   },
   "type": "module",
   "dependencies": {
+    "@azure/storage-blob": "^12.12.0",
     "node-fetch": "^3.3.0",
-    "node-html-parser": "^6.1.4"
+    "node-html-parser": "^6.1.4",
+    "pug": "^3.0.2"
   },
   "devDependencies": {
     "azure-functions-core-tools": "^4.x"

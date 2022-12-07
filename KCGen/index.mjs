@@ -1,5 +1,16 @@
 import {getStudyGuide} from '../scrapper.js'
-import {generateKnowledgeCheckDocumentToString} from "../generator.js";
+import pug from 'pug'
+import {BlobServiceClient, StorageSharedKeyCredential} from '@azure/storage-blob'
+import fs from "fs";
+
+async function streamToText(readable) {
+    readable.setEncoding('utf8');
+    let data = '';
+    for await (const chunk of readable) {
+        data += chunk;
+    }
+    return data;
+}
 
 export default async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.');
@@ -11,23 +22,55 @@ export default async function (context, req) {
 
     var content = ``
     var status = 200
-    var contentType = `text`
+    var contentType = `text/html`
 
     try {
+        const templatePath = `KCGen/templates`
         const code = req.params.code
         const courseId = req.query.courseId
         const locale = req.query.locale ?? `en-us`
 
         if (courseId) {
-            const studyGuide = await getStudyGuide(courseId, locale)
-            content = generateKnowledgeCheckDocumentToString(studyGuide)
+            const accountName = `jfbilodeau`;
+            const storageAccountUrl = `https://${accountName}.blob.core.windows.net`;
+            const accountKey = `6IYAjWjBLTcL1C46boIfeB8iWe8IUdAlDQ391WGIG9vSsLM5QDXCF9sw1q7+6kqkgWUVnPvi5+JT+ASteTtnbA==`;
+            const blobClient = new BlobServiceClient(storageAccountUrl, new StorageSharedKeyCredential(accountName, accountKey))
+
+            const containerName = `knowledgechecks`;
+            const container = await blobClient.getContainerClient(containerName)
+
+            const blobName = `${courseId}.${locale}`
+            const blob = await container.getBlockBlobClient(blobName)
+
+            let studyGuide = ''
+
+            if (await blob.exists()) {
+                const content = await blob.download(0)
+                const json = await streamToText(content.readableStreamBody)
+                studyGuide = JSON.parse(json)
+            } else {
+                const studyGuide = await getStudyGuide(courseId, locale)
+                // studyGuide = JSON.parse(fs.readFileSync(`./KCGen/test.json`))
+
+                const studyGuideJson = JSON.stringify(studyGuide)
+
+                await blob.upload(studyGuideJson, studyGuideJson.length)
+            }
+
+            // content = generateKnowledgeCheckDocumentToString(studyGuide)
+            const template = pug.compileFile(`${templatePath}/document.pug`)
+            content = template(studyGuide)
         } else {
-            content = `<!doctype html><form><hidden name="code" value="${code}"></hidden>Course ID: <input name="courseId"><button type="submit">Generate</button></form>`
+            const template = pug.compileFile(`${templatePath}/form.pug`)
+
+            // content = `<!doctype html><form><hidden name="code" value="${code}"></hidden>Course ID: <input name="courseId"><button type="submit">Generate</button></form>`
+            content = template()
             contentType = `text/html`
         }
     } catch (e) {
         status = 500
         content = e.toString()
+        console.error(e)
     }
 
     context.res = {
