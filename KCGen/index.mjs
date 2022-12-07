@@ -49,7 +49,7 @@ export default async function (context, req) {
                 const json = await streamToText(content.readableStreamBody)
                 studyGuide = JSON.parse(json)
             } else {
-                const studyGuide = await getStudyGuide(courseId, locale)
+                studyGuide = await getStudyGuide(courseId, locale)
                 // studyGuide = JSON.parse(fs.readFileSync(`./KCGen/test.json`))
 
                 const studyGuideJson = JSON.stringify(studyGuide)
