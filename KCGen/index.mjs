@@ -26,7 +26,7 @@ export default async function (context, req) {
 
     try {
         const templatePath = `KCGen/templates`
-        const code = req.params.code
+        const code = req.query.code
         const courseId = req.query.courseId
         const locale = req.query.locale ?? `en-us`
 
@@ -64,7 +64,9 @@ export default async function (context, req) {
             const template = pug.compileFile(`${templatePath}/form.pug`)
 
             // content = `<!doctype html><form><hidden name="code" value="${code}"></hidden>Course ID: <input name="courseId"><button type="submit">Generate</button></form>`
-            content = template()
+            content = template({
+                code
+            })
             contentType = `text/html`
         }
     } catch (e) {
