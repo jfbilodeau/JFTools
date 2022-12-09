@@ -31,9 +31,9 @@ export default async function (context, req) {
         const locale = req.query.locale?.toLowerCase() ?? `en-us`
 
         if (courseId) {
-            const accountName = `jfbilodeau`;
-            const storageAccountUrl = `https://${accountName}.blob.core.windows.net`;
-            const accountKey = `6IYAjWjBLTcL1C46boIfeB8iWe8IUdAlDQ391WGIG9vSsLM5QDXCF9sw1q7+6kqkgWUVnPvi5+JT+ASteTtnbA==`;
+            const accountName = process.env.JFTOOLS_KCGEN_STORAGE_ACCOUNT_NAME
+            const storageAccountUrl = process.env.JFTOOLS_KCGEN_STORAGE_ACCOUNT_URL
+            const accountKey = process.env.JFTOOLS_KCGEN_STORAGE_ACCOUNT_KEY
             const blobClient = new BlobServiceClient(storageAccountUrl, new StorageSharedKeyCredential(accountName, accountKey))
 
             const containerName = `knowledgechecks`;
