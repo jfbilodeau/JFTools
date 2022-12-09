@@ -27,8 +27,8 @@ export default async function (context, req) {
     try {
         const templatePath = `KCGen/templates`
         const code = req.query.code
-        const courseId = req.query.courseId
-        const locale = req.query.locale ?? `en-us`
+        const courseId = req.query.courseId?.toLowerCase()
+        const locale = req.query.locale?.toLowerCase() ?? `en-us`
 
         if (courseId) {
             const accountName = `jfbilodeau`;
