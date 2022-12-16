@@ -26,7 +26,7 @@ app.use(cors({
 
 app.use('/', indexRouter);
 app.use('/kc', kcRouter);
-app.use('/klax', klaxRouter);
+// app.use('/klax', klaxRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
