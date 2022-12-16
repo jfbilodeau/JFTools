@@ -1,0 +1,20 @@
+block content
+    h2 Select modules
+    form(method='post')
+        input(type='hidden' name='courseId' value=courseId)
+        input(type='hidden' name='locale' value=locale)
+        p Session Name:&nbsp;
+            input(name='title' value=title size=100)
+        p Cookie:&nbsp;
+            input(name='cookie')
+        p
+        each path in paths
+          each module in path.modules
+            p #{module.title}
+            each unit in module.units
+              if unit.questions.length
+                  p
+                    input(type='checkbox' id=`unit.${unit.id}` name=`unit.${unit.id}` value='en-us')
+                    label(for=`unit.${unit.id}`) #{unit.title}
+        p
+            button(type='submit') Submit
