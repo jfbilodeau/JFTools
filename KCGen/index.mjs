@@ -1,28 +1,12 @@
-import {getStudyGuide} from '../scrapper.js'
+import {getStudyGuide} from '../../scrapper.js'
 import pug from 'pug'
-import {BlobServiceClient, StorageSharedKeyCredential} from '@azure/storage-blob'
-import fs from "fs";
-
-async function streamToText(readable) {
-    readable.setEncoding('utf8');
-    let data = '';
-    for await (const chunk of readable) {
-        data += chunk;
-    }
-    return data;
-}
 
 export default async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.');
 
-    // const name = (req.query.name || (req.body && req.body.name));
-    // const responseMessage = name
-    //     ? "Hello, " + name + ". This HTTP triggered function executed successfully."
-    //     : "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.";
-
-    var content = ``
-    var status = 200
-    var contentType = `text/html`
+    let content = ``;
+    let status = 200;
+    let contentType = `text/html`;
 
     try {
         const templatePath = `KCGen/templates`
@@ -31,33 +15,10 @@ export default async function (context, req) {
         const locale = req.query.locale?.toLowerCase() ?? `en-us`
 
         if (courseId) {
-            const accountName = process.env.JFTOOLS_KCGEN_STORAGE_ACCOUNT_NAME
-            const storageAccountUrl = process.env.JFTOOLS_KCGEN_STORAGE_ACCOUNT_URL
-            const accountKey = process.env.JFTOOLS_KCGEN_STORAGE_ACCOUNT_KEY
-            const blobClient = new BlobServiceClient(storageAccountUrl, new StorageSharedKeyCredential(accountName, accountKey))
+            const studyGuide = await getStudyGuide(courseId, locale)
 
-            const containerName = `knowledgechecks`;
-            const container = await blobClient.getContainerClient(containerName)
+            console.log(`Content: ${studyGuide}`)
 
-            const blobName = `${courseId}.${locale}`
-            const blob = await container.getBlockBlobClient(blobName)
-
-            let studyGuide = ''
-
-            if (await blob.exists()) {
-                const content = await blob.download(0)
-                const json = await streamToText(content.readableStreamBody)
-                studyGuide = JSON.parse(json)
-            } else {
-                studyGuide = await getStudyGuide(courseId, locale)
-                // studyGuide = JSON.parse(fs.readFileSync(`./KCGen/test.json`))
-
-                const studyGuideJson = JSON.stringify(studyGuide)
-
-                await blob.upload(studyGuideJson, studyGuideJson.length)
-            }
-
-            // content = generateKnowledgeCheckDocumentToString(studyGuide)
             const template = pug.compileFile(`${templatePath}/document.pug`)
             content = template(studyGuide)
         } else {

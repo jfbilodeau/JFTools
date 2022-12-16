@@ -1,0 +1,379 @@
+https://learn.microsoft.com/en-ca/training/azure/
+{
+    "category": {
+        "href": "/training/",
+        "title": "Training",
+        "kind": "link"
+    },
+    "items": [
+        {
+            "id": "products",
+            "items": [
+                {
+                    "href": "/training/azure/",
+                    "title": "Azure",
+                    "kind": "link"
+                },
+                {
+                    "href": "/training/dynamics365/",
+                    "title": "Dynamics 365",
+                    "kind": "link"
+                },
+                {
+                    "href": "/training/github/",
+                    "title": "GitHub",
+                    "kind": "link"
+                },
+                {
+                    "href": "/training/m365/",
+                    "title": "Microsoft 365",
+                    "kind": "link"
+                },
+                {
+                    "href": "/training/dotnet/",
+                    "title": ".NET",
+                    "kind": "link"
+                },
+                {
+                    "href": "/training/powerplatform/",
+                    "title": "Power platform",
+                    "kind": "link"
+                },
+                {
+                    "href": "/training/teams/",
+                    "title": "Teams",
+                    "kind": "link"
+                },
+                {
+                    "href": "/training/browse/",
+                    "title": "Browse all paths",
+                    "kind": "link"
+                }
+            ],
+            "title": "Products",
+            "kind": "menu"
+        },
+        {
+            "id": "roles",
+            "items": [
+                {
+                    "href": "/training/roles/administrator",
+                    "title": "Administrator",
+                    "kind": "link"
+                },
+                {
+                    "href": "/training/roles/ai-engineer",
+                    "title": "AI Engineer",
+                    "kind": "link"
+                },
+                {
+                    "href": "/training/roles/app-maker",
+                    "title": "App Maker",
+                    "kind": "link"
+                },
+                {
+                    "href": "/training/roles/auditor",
+                    "title": "Auditor",
+                    "kind": "link"
+                },
+                {
+                    "href": "/training/roles/business-user",
+                    "title": "Business User",
+                    "kind": "link"
+                },
+                {
+                    "href": "/training/roles/data-analyst",
+                    "title": "Data Analyst",
+                    "kind": "link"
+                },
+                {
+                    "href": "/training/roles/data-engineer",
+                    "title": "Data Engineer",
+                    "kind": "link"
+                },
+                {
+                    "href": "/training/roles/data-scientist",
+                    "title": "Data Scientist",
+                    "kind": "link"
+                },
+                {
+                    "href": "/training/roles/developer",
+                    "title": "Developer",
+                    "kind": "link"
+                },
+                {
+                    "href": "/training/roles/devops-engineer",
+                    "title": "DevOps Engineer",
+                    "kind": "link"
+                },
+                {
+                    "href": "/training/roles/functional-consultant",
+                    "title": "Functional consultant",
+                    "kind": "link"
+                },
+                {
+                    "href": "/training/roles/security-engineer",
+                    "title": "Security Engineer",
+                    "kind": "link"
+                },
+                {
+                    "href": "/training/roles/solutions-architect",
+                    "title": "Solutions architect",
+                    "kind": "link"
+                }
+            ],
+            "title": "Roles",
+            "kind": "menu"
+        },
+        {
+            "href": "/training/browse/",
+            "id": "learning-paths",
+            "title": "Learning paths",
+            "kind": "link"
+        },
+        {
+            "href": "/training/courses/browse/",
+            "id": "browse-courses",
+            "title": "Courses",
+            "kind": "link"
+        },
+        {
+            "id": "educator-center",
+            "items": [
+                {
+                    "href": "/training/educator-center/",
+                    "title": "Overview",
+                    "kind": "link"
+                },
+                {
+                    "id": "professional-development",
+                    "items": [
+                        {
+                            "href": "/training/educator-center/topics/whats-new",
+                            "title": "What’s happening in education",
+                            "kind": "link"
+                        },
+                        {
+                            "href": "/training/educator-center/topics/stem",
+                            "title": "STEM, coding and esports",
+                            "kind": "link"
+                        },
+                        {
+                            "href": "/training/educator-center/topics/student-centered-learning",
+                            "title": "Student-centred learning",
+                            "kind": "link"
+                        },
+                        {
+                            "href": "/training/educator-center/topics/accessibility",
+                            "title": "Accessibility and inclusivity",
+                            "kind": "link"
+                        },
+                        {
+                            "href": "/training/educator-center/topics/education-leadership",
+                            "title": "Education leadership and staff collaboration",
+                            "kind": "link"
+                        },
+                        {
+                            "href": "/training/educator-center/topics/social-emotional-learning",
+                            "title": "Social emotional learning",
+                            "kind": "link"
+                        },
+                        {
+                            "href": "/training/educator-center/topics/blended-learning",
+                            "title": "Blended, remote and hybrid learning",
+                            "kind": "link"
+                        },
+                        {
+                            "href": "/training/educator-center/topics/instructional-toolbox",
+                            "title": "Microsoft instructional toolbox",
+                            "kind": "link"
+                        },
+                        {
+                            "href": "https://learn.microsoft.com/training/browse/?roles=k-12-educator%2Chigher-ed-educator%2Cschool-leader%2Cparent-guardian",
+                            "title": "Browse all",
+                            "kind": "link"
+                        }
+                    ],
+                    "title": "Professional development",
+                    "kind": "menu"
+                },
+                {
+                    "id": "product-guides",
+                    "items": [
+                        {
+                            "href": "/training/educator-center/product-guides/teams",
+                            "title": "Microsoft Teams for education",
+                            "kind": "link"
+                        },
+                        {
+                            "href": "/training/educator-center/product-guides/onenote",
+                            "title": "OneNote for education",
+                            "kind": "link"
+                        },
+                        {
+                            "href": "/training/educator-center/product-guides/office",
+                            "title": "Office 365 for education",
+                            "kind": "link"
+                        },
+                        {
+                            "href": "/training/educator-center/product-guides/minecraft",
+                            "title": "Minecraft: Education Edition",
+                            "kind": "link"
+                        },
+                        {
+                            "href": "/training/educator-center/product-guides/flip",
+                            "title": "Flip",
+                            "kind": "link"
+                        },
+                        {
+                            "href": "/training/educator-center/product-guides/windows",
+                            "title": "Windows for education",
+                            "kind": "link"
+                        },
+                        {
+                            "href": "/training/educator-center/product-guides/powerpoint",
+                            "title": "PowerPoint for education",
+                            "kind": "link"
+                        },
+                        {
+                            "href": "/training/educator-center/product-guides/immersive-reader/",
+                            "title": "Immersive Reader",
+                            "kind": "link"
+                        },
+                        {
+                            "href": "/training/educator-center/product-guides/reading-progress/",
+                            "title": "Reading Progress",
+                            "kind": "link"
+                        },
+                        {
+                            "href": "https://learn.microsoft.com/training/browse/?roles=k-12-educator%2Chigher-ed-educator%2Cschool-leader%2Cparent-guardian",
+                            "title": "Browse all",
+                            "kind": "link"
+                        }
+                    ],
+                    "title": "Product guides",
+                    "kind": "menu"
+                },
+                {
+                    "id": "instructor-materials",
+                    "items": [
+                        {
+                            "href": "/training/educator-center/instructor-materials/bbc-my-world-global-curriculum",
+                            "title": "BBC My World",
+                            "kind": "link"
+                        },
+                        {
+                            "href": "/training/educator-center/instructor-materials/day-data-orcas",
+                            "title": "Day of Data",
+                            "kind": "link"
+                        },
+                        {
+                            "href": "/training/educator-center/instructor-materials/digital-literacy",
+                            "title": "Digital literacy",
+                            "kind": "link"
+                        },
+                        {
+                            "href": "/training/educator-center/instructor-materials/farmbeats-for-students",
+                            "title": "FarmBeats for Students",
+                            "kind": "link"
+                        },
+                        {
+                            "href": "/training/educator-center/instructor-materials/hacking-stem",
+                            "title": "Hacking STEM",
+                            "kind": "link"
+                        },
+                        {
+                            "href": "/training/educator-center/instructor-materials/microsoft-office-2019-certification-preparation-materials",
+                            "title": "Microsoft Office Specialist",
+                            "kind": "link"
+                        },
+                        {
+                            "href": "/training/educator-center/instructor-materials/special-olympics",
+                            "title": "Special Olympics Unified Champion Schools®",
+                            "kind": "link"
+                        }
+                    ],
+                    "title": "Instructor materials",
+                    "kind": "menu"
+                },
+                {
+                    "id": "educator-programs",
+                    "items": [
+                        {
+                            "href": "/training/educator-center/programs/",
+                            "title": "Programs overview",
+                            "kind": "link"
+                        },
+                        {
+                            "href": "/training/educator-center/programs/microsoft-educator/",
+                            "title": "Microsoft Educator (ME)",
+                            "kind": "link"
+                        },
+                        {
+                            "href": "/training/educator-center/programs/microsoft-educator/trainer",
+                            "title": "ME Trainer",
+                            "kind": "link"
+                        },
+                        {
+                            "href": "/training/educator-center/programs/microsoft-educator/expert",
+                            "title": "Microsoft Innovative Educator Expert",
+                            "kind": "link"
+                        },
+                        {
+                            "href": "/training/educator-center/programs/microsoft-educator/showcase-schools",
+                            "title": "Showcase Schools",
+                            "kind": "link"
+                        },
+                        {
+                            "href": "/training/educator-center/programs/msle/",
+                            "title": "Microsoft Learn for Educators",
+                            "kind": "link"
+                        }
+                    ],
+                    "title": "Educator programmes",
+                    "kind": "menu"
+                }
+            ],
+            "title": "Educator Center",
+            "kind": "menu"
+        },
+        {
+            "id": "student-hub",
+            "items": [
+                {
+                    "href": "/training/student-hub/",
+                    "title": "Overview",
+                    "kind": "link"
+                },
+                {
+                    "href": "/training/student-hub/certifications",
+                    "title": "Student certifications",
+                    "kind": "link"
+                },
+                {
+                    "href": "/training/student-hub/student-events-on-demand",
+                    "title": "Student events on-demand",
+                    "kind": "link"
+                }
+            ],
+            "title": "Student hub",
+            "kind": "menu"
+        },
+        {
+            "href": "/training/support/",
+            "id": "faq-help",
+            "title": "FAQ & Help",
+            "kind": "link"
+        }
+    ],
+    "schema": "ContentNav",
+    "locale": "en-ca",
+    "updated_at": "2022-11-18 02:05 PM",
+    "hideEdit": true,
+    "feedback_system": "None",
+    "ms.translationtype": "HT",
+    "ms.contentlocale": "en-ca",
+    "loc_version": "2022-11-14T23:01:14.1284817Z",
+    "loc_source_id": "Github-61332620#live",
+    "loc_file_id": "Github-61332620.live.MSDN.content-nav.MSDocsHeader-Learn.yml"
+}
