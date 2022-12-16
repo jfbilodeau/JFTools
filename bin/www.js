@@ -6,6 +6,9 @@
 import app from "../app.js";
 import http from "http";
 
+import debug from "debug"
+debug('jftools:server')
+
 /**
  * Get port from environment and store in Express.
  */
