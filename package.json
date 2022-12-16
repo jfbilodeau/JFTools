@@ -1,22 +1,23 @@
 {
-  "name": "",
-  "version": "1.0.0",
-  "description": "",
+  "name": "jftools",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "start": "func start",
-    "test": "echo \"No tests yet...\""
+    "start": "node bin/www.js"
   },
   "type": "module",
   "dependencies": {
     "@azure/storage-blob": "^12.12.0",
-    "adm-zip": "^0.5.9",
     "axios": "^1.2.1",
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
     "dotenv": "^16.0.3",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1",
     "node-fetch": "^3.3.0",
     "node-html-parser": "^6.1.4",
-    "pug": "^3.0.2"
-  },
-  "devDependencies": {
-    "azure-functions-core-tools": "^4.x"
+    "pug": "2.0.0-beta11"
   }
 }
