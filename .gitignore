@@ -5,6 +5,8 @@ csx
 edge
 Publish
 
+.env
+
 *.user
 *.suo
 *.cscfg
