@@ -6,8 +6,10 @@ block content
         p Locale:&nbsp;
             input(name='locale' value='en-us')
         p
-            input(name='raw' type='checkbox' id='fieldRaw')
-            label(for='fieldRaw') Raw JSON
+            label(for='fieldRaw') Format:
+            select(name='format' id='fieldRaw')
+                option(value='html') HTML
+                option(value='json') JSON
         p
             button(type='submit') Submit
 
