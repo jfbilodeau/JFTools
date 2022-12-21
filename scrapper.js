@@ -42,6 +42,11 @@ async function scrapeKnowledgeCheck(courseId, locale) {
 
     const pathResponse = await fetch(pathUrl, {})
 
+    if (pathResponse.status === 404) {
+        return {
+            error: true
+        }
+    }
     const studyGuideJson = await pathResponse.json()
 
     const studyGuide = {

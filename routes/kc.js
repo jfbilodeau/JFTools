@@ -16,6 +16,11 @@ router.get(`/document`, async (req, res, next) => {
   if (courseId) {
     const studyGuide = await scrapper.getStudyGuide(courseId, locale)
 
+    if (studyGuide.error) {
+      res.render(`kc/index`, { message: `Course ID '${courseId}' not found`})
+
+      return
+    }
     switch (format) {
       case 'json':
         res.json(studyGuide)
