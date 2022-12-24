@@ -2,7 +2,7 @@ extends ../layout
 
 block content
     h2 Generate knowledge check
-    form(action='/kc/document')
+    form(action='/kc/units')
         p Course ID:&nbsp;
             input(name='courseId' placeholder='ex: az-204')
         if message
@@ -14,6 +14,7 @@ block content
             select(name='format' id='fieldRaw')
                 option(value='html') HTML
                 option(value='json') JSON
+                option(value='json') KlaxGen
         p
             button(type='submit') Submit
 

@@ -1,5 +1,6 @@
 import express from 'express'
 import * as scrapper from '../scrapper.js'
+import * as klaxgen from '../klaxgen.js'
 
 const router = express.Router()
 
@@ -8,7 +9,19 @@ router.get('/', (req, res, next) => {
   res.render('kc/index')
 })
 
-router.get(`/document`, async (req, res, next) => {
+router.get(`/units`, async (req, res, next) => {
+  const courseId = req.query.courseId?.toLowerCase()
+  const locale = req.query.locale?.toLowerCase() ?? `en-us`
+  const format = req.query.format?.toLowerCase() ?? (req.query.raw ? 'json' : null)
+
+  const studyGuide = await scrapper.getStudyGuide(courseId, locale)
+
+  studyGuide.format = format
+
+  res.render('kc/units', studyGuide)
+})
+
+router.get(`/generate`, async (req, res, next) => {
   const courseId = req.query.courseId?.toLowerCase()
   const locale = req.query.locale?.toLowerCase() ?? `en-us`
   const format = req.query.format?.toLowerCase() ?? (req.query.raw ? 'json' : null)
@@ -21,13 +34,33 @@ router.get(`/document`, async (req, res, next) => {
 
       return
     }
+
+    // Remove de-selected units.
+    studyGuide.paths.forEach(p => {
+      p.modules.forEach(m => {
+        m.units = m.units.filter(u => u.id in req.query)
+      })
+
+      p.modules = p.modules.filter(m => m.units.length)
+    })
+
+    studyGuide.paths =
+      studyGuide.paths.filter(p => p.modules.length)
+
     switch (format) {
       case 'json':
         res.json(studyGuide)
         break
+
       case 'html':
-        res.render(`kc/document`, studyGuide)
+        res.render(`kc/generate`, studyGuide)
         break
+
+      case 'klaxgen':
+        const script = klaxgen.generateKlaxGenScript(studyGuide)
+        res.render(`kc/klaxGen`, { script })
+        break
+
       default:
         res.status(400).send(`format must be 'json' or 'html'`)
     }

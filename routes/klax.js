@@ -1,6 +1,6 @@
 import express from 'express'
 import * as scrapper from '../scrapper.js'
-import * as klaxoon from '../klaxoon.js'
+import * as klaxoon from '../klaxgen.js'
 
 const router = express.Router()
 

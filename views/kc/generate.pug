@@ -14,7 +14,7 @@ each path in paths
             each unit in module.units
                 if unit.questions.length
                     li
-                        a(href=`#{module.url}`) #{module.title} - #{unit.title}
+                        a(href=`#${module.url}`) #{module.title} - #{unit.title}
 
 hr
 
@@ -37,28 +37,3 @@ each path in paths
 
                 p
                     a(href='#toc') [table of content]
-
-//hr
-//
-//each path in paths
-//    h2 #{path.title}
-//    a(href=path.url) #{path.url}
-//
-//    each module in path.modules
-//        h3 #{module.title}
-//        a(href=module.url) #{module.url}
-//
-//        each unit in module.units
-//            h4 #{unit.title}
-//            a(href=unit.url) #{unit.url}
-//
-//            if unit.questions.length
-//                each question in unit.questions
-//                    p #{question.question}
-//                    each option,index in question.options
-//                        p
-//                            input(type='checkbox' checked=index===question.answer)
-//                            span #{option}
-//                    p #{question.answerText}
-//            else
-//                p (no knowledge check questions)
