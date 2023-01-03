@@ -1,8 +1,4 @@
 {
-    "appService.zipIgnorePattern": [
-        "node_modules{,/**}",
-        ".vscode{,/**}"
-    ],
     "appService.defaultWebAppToDeploy": "/subscriptions/72453083-3ca3-4638-9779-89eca7e2fd83/AppServices/subscriptions/72453083-3ca3-4638-9779-89eca7e2fd83/resourceGroups/JFBilodeau.Tools/providers/Microsoft.Web/sites/jftools",
     "appService.deploySubpath": "."
 }
