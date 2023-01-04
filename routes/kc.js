@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { query } from 'express'
 import * as scrapper from '../scrapper.js'
 import * as klaxgen from '../klaxgen.js'
 
@@ -36,19 +36,22 @@ router.get(`/generate`, async (req, res, next) => {
     const studyGuide = await scrapper.getStudyGuide(courseId, locale)
 
     if (studyGuide.error) {
+      res.status(404)
       res.render(`kc/index`, { message: `Course ID '${courseId}' with locale '${locale}' not found`})
 
       return
     }
 
-    // Remove de-selected units.
-    studyGuide.paths.forEach(p => {
-      p.modules.forEach(m => {
-        m.units = m.units.filter(u => u.id in req.query)
-      })
+    if (!req.query.all) {
+      // Remove de-selected units.
+      studyGuide.paths.forEach(p => {
+        p.modules.forEach(m => {
+          m.units = m.units.filter(u => u.id in req.query)
+        })
 
-      p.modules = p.modules.filter(m => m.units.length)
-    })
+        p.modules = p.modules.filter(m => m.units.length)
+      })
+    }
 
     studyGuide.paths =
       studyGuide.paths.filter(p => p.modules.length)

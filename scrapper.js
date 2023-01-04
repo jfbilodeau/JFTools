@@ -27,9 +27,11 @@ export async function getStudyGuide(courseId, locale) {
         studyGuide = await scrapeKnowledgeCheck(courseId, locale)
         // studyGuide = JSON.parse(fs.readFileSync(`./KCGen/test.json`))
 
-        const studyGuideJson = JSON.stringify(studyGuide)
+        if (!studyGuide.error) {
+            const studyGuideJson = JSON.stringify(studyGuide)
 
-        await blob.upload(studyGuideJson, studyGuideJson.length)
+            await blob.upload(studyGuideJson, studyGuideJson.length)
+        }
     }
 
     return studyGuide
