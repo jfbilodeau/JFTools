@@ -7,6 +7,7 @@ import logger from "morgan";
 import cookieParser from "cookie-parser";
 import path from "path";
 import cors from 'cors'
+import session from 'express-session'
 
 const app = express()
 
@@ -22,6 +23,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors({
   origin: `*`
+}))
+app.use(session({
+  secret: process.env["JFTOOLS_SESSION_SECRET"],
+  resave: false,
+  saveUninitialized: false,
 }))
 
 app.use('/', indexRouter);

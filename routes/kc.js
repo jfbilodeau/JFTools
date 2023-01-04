@@ -62,6 +62,10 @@ router.get(`/generate`, async (req, res, next) => {
         res.render(`kc/generate`, studyGuide)
         break
 
+      case 'outline':
+        res.render(`kc/outline`, studyGuide)
+        break;
+
       case 'klax':
         const script = klaxgen.generateKlaxGenScript(studyGuide)
         res.render(`kc/klax`, { script })
