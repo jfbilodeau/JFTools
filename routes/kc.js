@@ -69,13 +69,13 @@ router.get(`/generate`, async (req, res, next) => {
         res.render(`kc/outline`, studyGuide)
         break;
 
-      case 'klax':
+      case 'poll':
         const script = klaxgen.generateKlaxGenScript(studyGuide)
-        res.render(`kc/klax`, { script })
+        res.render(`kc/poll`, { script })
         break
 
       default:
-        res.status(400).send(`format must be 'json', 'klax' or 'html'`)
+        res.status(400).send(`format must be 'html, 'outline', 'json' or 'poll'`)
     }
   } else {
     res.redirect(`index`)

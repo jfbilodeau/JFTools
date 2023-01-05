@@ -5,7 +5,7 @@ export function generateKlaxGenScript (studyGuide) {
     p.modules.forEach(m => {
       m.units.forEach(u => {
         u.questions.forEach(q => {
-          script += `${q.question}\n`
+          script += `Poll: ${q.question}\n`
           script += q.options.map(o => `- ${o}\n`).reduce((a, c) => `${c}${a}`, ``)
           script += `\n`
         })
