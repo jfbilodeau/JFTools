@@ -1,0 +1,40 @@
+extends ../layout
+
+block content
+    h1 #{studyGuide.title}
+    p Course URL:
+        a(href=studyGuide.url) #{studyGuide.url}
+
+    h2(id='toc') Knowledge Checks
+
+    each path in studyGuide.paths
+        p
+            strong #{path.title}
+        each module in path.modules
+                ul
+                each unit in module.units
+                    if unit.questions.length
+                        li
+                            a(href=`#${module.url}`) #{module.title} - #{unit.title}
+
+    hr
+
+    each path in studyGuide.paths
+        each module in path.modules
+            each unit in module.units
+                if unit.questions.length
+                    h2(id=module.url) #{module.title} - #{unit.title}
+                    a(href=unit.url) #{unit.url}
+
+                    each question in unit.questions
+                        p
+                            b #{question.question}
+                        each option,index in question.options
+                            p
+                                input(type='checkbox' checked=index === question.answer disabled)
+                                span #{option}
+                        p
+                            em #{question.answerText}
+
+                    p
+                        a(href='#toc') [table of content]

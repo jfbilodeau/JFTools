@@ -7,12 +7,12 @@ block content
         span &nbsp;|&nbsp;
         a(onclick='selectNone()' href='#') Deselect All
     form(action='/kc/generate')
-        input(type='hidden' name='courseId' value=courseId)
-        input(type='hidden' name='locale' value=locale)
-        input(type='hidden' name='format' value=format)
+        input(type='hidden' name='courseId' value=studyGuide.courseId)
+        input(type='hidden' name='locale' value=studyGuide.locale)
+        input(type='hidden' name='format' value=studyGuide.format)
 
         button(type='submit') Generate
-        each path in paths
+        each path in studyGuide.paths
             each module in path.modules
                 h2 #{module.title}
                 each unit in module.units

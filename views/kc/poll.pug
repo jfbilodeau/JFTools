@@ -1,11 +1,12 @@
-doctype html
+extends ../layout
 
-h1 KlaxGen Script
+block content
+    h1 Poll Script
 
-p
-    button(type='button' onclick='copyScript()') Copy Script
+    p
+        button(type='button' onclick='copyScript()') Copy Script
 
-p
-    textarea(cols=80 rows=40 id=`fieldScript`) #{script}
+    p
+        textarea(cols=80 rows=40 id=`fieldScript`) #{script}
 
-script(src='/javascripts/kc/klaxGen.js')
+    script(src='/javascripts/kc/klaxGen.js')

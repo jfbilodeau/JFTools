@@ -1,4 +1,4 @@
-export function generateKlaxGenScript (studyGuide) {
+export function generatePollScript (studyGuide) {
   var script = `# Script for KlaxGen extension\n# https://github.com/jfbilodeau/KlaxGen#readme\n${studyGuide.title}\n\n`
 
   studyGuide.paths.forEach(p => {

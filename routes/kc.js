@@ -1,12 +1,13 @@
-import express, { query } from 'express'
+import express from 'express'
 import * as scrapper from '../scrapper.js'
-import * as klaxgen from '../klaxgen.js'
+import options from '../options.js'
+import * as poll from '../poll.js'
 
 const router = express.Router()
 
 /* GET users listing. */
-router.get('/', (req, res, next) => {
-  res.render('kc/index')
+router.get(`/`, (req, res, next) => {
+  res.render(`kc/index`, {  title: `Generate Knowledge Check` })
 })
 
 router.get(`/units`, async (req, res, next) => {
@@ -14,17 +15,18 @@ router.get(`/units`, async (req, res, next) => {
   const locale = req.query.locale?.toLowerCase() ?? `en-us`
   const format = req.query.format?.toLowerCase() ?? (req.query.raw ? 'json' : null)
 
+
   const studyGuide = await scrapper.getStudyGuide(courseId, locale)
 
   if (studyGuide.error) {
-    res.render(`kc/index`, { message: `Course ID '${courseId}' with locale '${locale}' not found`})
+    res.render(`kc/index`, { title: `Knowledge Check Generator`, message: `Course ID '${courseId}' with locale '${locale}' not found`})
 
     return
   }
 
   studyGuide.format = format
 
-  res.render('kc/units', studyGuide)
+  res.render('kc/units', { title: `Select units`, studyGuide })
 })
 
 router.get(`/generate`, async (req, res, next) => {
@@ -37,7 +39,7 @@ router.get(`/generate`, async (req, res, next) => {
 
     if (studyGuide.error) {
       res.status(404)
-      res.render(`kc/index`, { message: `Course ID '${courseId}' with locale '${locale}' not found`})
+      res.render(`kc/index`, options(`Error`, { message: `Course ID '${courseId}' with locale '${locale}' not found`}))
 
       return
     }
@@ -53,8 +55,7 @@ router.get(`/generate`, async (req, res, next) => {
       })
     }
 
-    studyGuide.paths =
-      studyGuide.paths.filter(p => p.modules.length)
+    studyGuide.paths = studyGuide.paths.filter(p => p.modules.length)
 
     switch (format) {
       case 'json':
@@ -62,7 +63,7 @@ router.get(`/generate`, async (req, res, next) => {
         break
 
       case 'html':
-        res.render(`kc/generate`, studyGuide)
+        res.render(`kc/html`, options(studyGuide.title, { studyGuide }))
         break
 
       case 'outline':
@@ -70,15 +71,15 @@ router.get(`/generate`, async (req, res, next) => {
         break;
 
       case 'poll':
-        const script = klaxgen.generateKlaxGenScript(studyGuide)
-        res.render(`kc/poll`, { script })
+        const script = poll.generatePollScript(studyGuide)
+        res.render(`kc/poll`, { title: studyGuide.title, script })
         break
 
       default:
         res.status(400).send(`format must be 'html, 'outline', 'json' or 'poll'`)
     }
   } else {
-    res.redirect(`index`)
+    res.redirect(`/kc`)
   }
 })
 

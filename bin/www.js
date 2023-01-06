@@ -3,10 +3,10 @@
 /**
  * Module dependencies.
  */
-import app from "../app.js";
-import http from "http";
+import app from '../app.js'
+import http from 'http'
 
-import debug from "debug"
+import debug from 'debug'
 debug('jftools:server')
 
 /**
@@ -35,19 +35,19 @@ server.on('listening', onListening);
  */
 
 function normalizePort(val) {
-  var port = parseInt(val, 10);
+  var port = parseInt(val, 10)
 
   if (isNaN(port)) {
     // named pipe
-    return val;
+    return val
   }
 
   if (port >= 0) {
     // port number
-    return port;
+    return port
   }
 
-  return false;
+  return false
 }
 
 /**
@@ -56,25 +56,25 @@ function normalizePort(val) {
 
 function onError(error) {
   if (error.syscall !== 'listen') {
-    throw error;
+    throw error
   }
 
   var bind = typeof port === 'string'
     ? 'Pipe ' + port
-    : 'Port ' + port;
+    : 'Port ' + port
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES':
       console.error(bind + ' requires elevated privileges');
-      process.exit(1);
+      process.exit(1)
       break;
     case 'EADDRINUSE':
       console.error(bind + ' is already in use');
-      process.exit(1);
+      process.exit(1)
       break;
     default:
-      throw error;
+      throw error
   }
 }
 
@@ -87,5 +87,5 @@ function onListening() {
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+  debug('Listening on ' + bind)
 }

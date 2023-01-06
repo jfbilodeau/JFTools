@@ -1,9 +1,16 @@
 doctype html
 html
   head
-    title=title
+    title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
+    if auth.loggedIn
+      p Hello, #{auth.username} |&nbsp;
+        a(href=`/auth/logout?returnUrl=${encodedUrl}`) Log Out
+    else
+      p
+        a(href=`/auth/login?returnUrl=${encodedUrl}`) Log in
+
     block content
   p
     small
