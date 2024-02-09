@@ -1,4 +1,5 @@
-import fetch from 'node-fetch';
+// import fetch from 'node-fetch';
+import fetch from 'isomorphic-fetch'
 import {parse} from 'node-html-parser';
 import {BlobServiceClient, StorageSharedKeyCredential} from '@azure/storage-blob';
 import dotenv from 'dotenv'
@@ -139,7 +140,7 @@ async function getKnowledgeCheckQuestionsForUnit(unit, locale) {
             options: []
         }
 
-        const answers = questionNode.querySelectorAll(`div[class="margin-inline-sm"]`)
+        const answers = questionNode.querySelectorAll(`label.quiz-choice`)
 
         for (const answer of answers) {
             const answerText = answer.text.trim();
