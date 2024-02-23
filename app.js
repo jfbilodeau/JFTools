@@ -1,14 +1,17 @@
 import createError from 'http-errors'
 import express from 'express'
-import indexRouter from './routes/index.js'
-import authRouter from './routes/auth.js'
-import kcRouter from "./routes/kc.js"
 import logger from 'morgan'
 import cookieParser from 'cookie-parser'
 import path from 'path'
 import cors from 'cors'
 import session from 'express-session'
 import * as auth from './auth.js'
+
+// Routes
+import indexRouter from './routes/index.js'
+import authRouter from './routes/auth.js'
+import kcRouter from "./routes/kc.js"
+import qrRouter from "./routes/qr.js"
 
 const app = express()
 
@@ -42,6 +45,7 @@ app.use((req, res, next) => {
 app.use('/', indexRouter)
 app.use('/auth', authRouter)
 app.use('/kc', kcRouter)
+app.use('/qr', qrRouter)
 
 // Register locals
 // catch 404 and forward to error handler
