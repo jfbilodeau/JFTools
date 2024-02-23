@@ -12,13 +12,13 @@ export function status (req) {
   return req.session.auth
 }
 
-export function setLoggedIn (req, username, client) {
+export function setLoggedIn (req, account) {
   initStatus(req)
 
   req.session.auth = {
     loggedIn: true,
-    username,
-    client // MS Graph Client
+    username: account.username,
+    account,
   }
 }
 
