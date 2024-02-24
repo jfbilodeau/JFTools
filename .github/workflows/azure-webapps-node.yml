@@ -41,13 +41,14 @@ jobs:
       uses: Azure/login@v1.6.1
       with:
         # Paste output of `az ad sp create-for-rbac` as value of secret variable: AZURE_CREDENTIALS
-        creds: ${{ secrets.AZURE_CREDENTIALS }} 
+        # creds: ${{ secrets.AZURE_CREDENTIALS }} 
         # ClientId of the Azure Service principal created.
-        # client-id: 96ac54e5-869d-4520-bb86-a2da36c7be55
+        client-id: 96ac54e5-869d-4520-bb86-a2da36c7be55
         # TenantId of the Azure Service principal created.
-        # tenant-id: 14f08b43-3b8c-4f1c-87c5-71e2bb2177f3
+        tenant-id: 14f08b43-3b8c-4f1c-87c5-71e2bb2177f3
         # Azure subscriptionId
-        # subscription-id: 72453083-3ca3-4638-9779-89eca7e2fd83
+        subscription-id: 72453083-3ca3-4638-9779-89eca7e2fd83
+        clientSecret: ${{ secrets.AZURE_CLIENT_SECRET }}
         # Set this value to true to enable Azure PowerShell Login in addition to Azure CLI login
         #enable-AzPSSession: # optional
         # Name of the environment. Supported values are azurecloud, azurestack, azureusgovernment, azurechinacloud, azuregermancloud. Default being azurecloud
