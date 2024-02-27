@@ -6,8 +6,12 @@ a {
   /*color: #00B7FF;*/
 }
 
-input[type="text"] {
+input[type="text"], input[type="password"], input[type="search"] {
   width: 40em;
+}
+
+img.qr {
+  display: block;
 }
 
 .error {

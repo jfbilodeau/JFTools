@@ -13,21 +13,19 @@ block content
         div#quickLinkGenerator(style={display:'none'})
             div#quickLink
                 p
-                    img#quickLinkQr
-                    br
+                    img#quickLinkQr.qr
                     a#quickLinkText
 
             button#commandCopyQuickLink(type='button' onclick='jf.copyElementToClipboard("quickLink")') &#128203; Copy
 
         p URL:&nbsp;
-            input#fieldQuickLink(oninput='jf.updateQuickLink()')
+            input#fieldQuickLink(type='search' oninput='jf.updateQuickLink()')
 
     details(open)
         summary Survey
         div#survey
             p
-                img(src=`/qr/${encodeURIComponent(settings.surveyUrl)}` alt=settings.surveyUrl)
-                br
+                img(src=surveyQrDataUrl alt=settings.surveyUrl).qr
                 a(href=settings.surveyUrl) #{settings.surveyUrl}
 
         button(type='button' onclick='jf.copyElementToClipboard("survey")') &#128203; Copy

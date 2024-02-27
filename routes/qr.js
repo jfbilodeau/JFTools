@@ -8,12 +8,19 @@ router.get('/', function(req, res, next) {
   res.render('qr/index', { title: 'QR Code Generator'})
 });
 
-router.get('/:text', function(req, res, next) {
+router.get('/:text', async function (req, res, next) {
+  const type = req.query.type
   const text = req.params.text
 
-  res.contentType('image/png')
+  if (type === 'url') {
+    const dataUrl = await QRCode.toDataURL(text)
 
-  QRCode.toFileStream(res, text)
+    res.send(dataUrl)
+  } else {
+    res.contentType('image/png')
+
+    QRCode.toFileStream(res, text)
+  }
 });
 
 export default router
