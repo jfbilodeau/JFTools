@@ -1,11 +1,41 @@
 import express from 'express'
-import options from '../options.js'
+import * as auth from '../auth.js'
+import * as cosmos from '../cosmos.js'
 
 const router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('links', { title: `Links` })
-});
+router.get('/', auth.authenticated, async function (req, res, next) {
+  const username = auth.getUsername(req)
+
+  const settings = await cosmos.getSettings(username)
+
+  res.render('links/index', { title: `Links`, settings })
+})
+
+router.get('/settings', auth.authenticated, async function (req, res, next) {
+  const username = auth.getUsername(req)
+
+  const settings = await cosmos.getSettings(username) ?? {}
+
+  res.render('links/settings', { title: `Link settings`, settings })
+})
+
+router.post('/settings', auth.authenticated, async function (req, res, next) {
+  const username = auth.getUsername(req)
+
+  const settings = {
+    id: username,
+    courseCode: req.body.courseCode,
+    deliveryId: req.body.deliveryId,
+    surveyUrl: req.body.surveyUrl,
+    labKey: req.body.labKey,
+    isCloudSlice: req.body.isCloudSlice === 'on',
+  }
+
+  await cosmos.saveSettings(settings)
+
+  res.redirect(req.originalUrl)
+})
 
 export default router

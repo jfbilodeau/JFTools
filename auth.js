@@ -12,6 +12,10 @@ export function status (req) {
   return req.session.auth
 }
 
+export function getUsername(req) {
+  return status(req).username
+}
+
 export function setLoggedIn (req, account) {
   initStatus(req)
 
@@ -24,4 +28,12 @@ export function setLoggedIn (req, account) {
 
 export function logout(req) {
   delete req.session.auth
+}
+
+export function authenticated(req, res, next) {
+  if (!status(req).loggedIn) {
+    res.redirect(`/auth/login?returnTo=${req.originalUrl}`)
+  } else {
+    next()
+  }
 }

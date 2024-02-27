@@ -1,12 +1,12 @@
 doctype html
 html
   head
-    title= title
+    title #{title} - Learnix
+    link(rel='stylesheet', href='/stylesheets/fa-regular.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
     if auth.loggedIn
-      p Hello, #{auth.username} |&nbsp;
-        a(href=`/auth/logout?returnUrl=${encodedUrl}`) Log Out
+      p Hello, #{auth.username} | #[a(href=`/auth/logout?returnUrl=${encodedUrl}`) Log Out]
     else
       p
         a(href=`/auth/login?returnUrl=${encodedUrl}`) Log in

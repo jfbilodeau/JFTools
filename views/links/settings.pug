@@ -1,0 +1,39 @@
+extends ../layout
+
+block content
+    h2 Link settings
+
+    form(method='post')
+        fieldset
+            legend Course settings
+            table
+                tr
+                    td
+                        label(for='fieldCourseCode') Course code:
+                    td
+                        input(type="text" name="courseCode" id="fieldCourseCode" value=settings.courseCode size=80 required)
+                tr
+                    td
+                        label(for='fieldDeliveryId') Delivery ID:
+                    td
+                        input(type="text" name="deliveryId" id="fieldDeliveryId" size=80 value=settings.deliveryId)
+                tr
+                    td
+                        label(for='fieldSurveyUrl') Survey URL:
+                    td
+                        input(type="text" name="surveyUrl" id="fieldSurveyUrl" size=80 value=settings.surveyUrl)
+                tr
+                    td
+                        label(for='fieldLabKey') Lab key:
+                    td
+                        input(type="text" name="labKey" id="fieldLabKey" size=80 value=settings.labKey)
+                tr
+                    td
+                        label(for='fieldIsCloudSlice') Cloud Slice lab:
+                    td
+                        input(type="checkbox" name="isCloudSlice" id="fieldIsCloudSlice" size=80 checked=settings.isCloudSlice)
+        p
+            button(type="submit") Save
+
+    p
+        a(href='/links') Back to course

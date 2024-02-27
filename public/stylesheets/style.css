@@ -1,5 +1,4 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -7,6 +6,14 @@ a {
   /*color: #00B7FF;*/
 }
 
+input[type="text"] {
+  width: 40em;
+}
+
 .error {
   color: darkred;
+}
+
+details {
+  border: darkgrey 1px solid;
 }

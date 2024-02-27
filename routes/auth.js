@@ -27,7 +27,7 @@ router.get('/login', async (req, res, next) => {
     scopes,
     redirectUri: process.env.JFTOOLS_AUTH_REDIRECT_URI,
     prompt: `select_account`,
-    state: req.query.returnUrl,
+    state: req.query.returnTo,
   }
 
   let authCodeUrl = await confidentialClientApplication.getAuthCodeUrl(authorizationUrlRequest)
@@ -37,10 +37,10 @@ router.get('/login', async (req, res, next) => {
 
 router.get('/code', async (req, res, next) => {
   try {
-    const returnUrl = decodeURI(req.query.state)
+    const returnTo = decodeURI(req.query.state)
 
     if (req.query.error) {
-      return res.redirect(returnUrl)
+      return res.redirect(returnTo)
     }
 
     const code = req.query.code
@@ -49,7 +49,7 @@ router.get('/code', async (req, res, next) => {
       code,
       scopes,
       redirectUri: process.env.JFTOOLS_AUTH_REDIRECT_URI,
-      state: encodeURI(returnUrl),
+      state: encodeURI(returnTo),
     }
 
     const result = await confidentialClientApplication.acquireTokenByCode(tokenRequest)
@@ -57,7 +57,7 @@ router.get('/code', async (req, res, next) => {
 
     auth.setLoggedIn(req, account)
 
-    res.redirect(returnUrl)
+    res.redirect(returnTo)
   } catch(e) {
     console.log(e)
 
@@ -68,9 +68,9 @@ router.get('/code', async (req, res, next) => {
 router.get('/logout', (req, res, next) => {
   auth.logout(req)
 
-  const returnUrl = decodeURI(req.query.returnUrl) ?? `/`
+  const returnTo = decodeURI(req.query.returnTo) ?? `/`
 
-  res.redirect(returnUrl)
+  res.redirect(returnTo)
 })
 
 export default router
