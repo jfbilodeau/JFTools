@@ -1,20 +1,26 @@
-function generateQr(event) {
-  const fieldText = document.getElementById('fieldText')
-  const text = fieldText.value
+(function () {
+  'use strict'
 
-  if (text.trim()) {
-    const urlEncodedText = encodeURIComponent(text)
+  function generateQr(event) {
+    const fieldText = document.getElementById('fieldText')
+    const text = fieldText.value
 
-    window.location.href = '/qr/' + urlEncodedText
+    if (text.trim()) {
+      const urlEncodedText = encodeURIComponent(text)
+
+      window.location.href = '/qr/' + urlEncodedText
+    }
+
+    // Do not submit the form
+    event.preventDefault()
+    return false
   }
 
-  // Do not submit the form
-  event.preventDefault()
-  return false
-}
+  window.addEventListener('load', function () {
+    const formQr = document.getElementById('formQr')
+    formQr.addEventListener('submit', generateQr)
 
-const formQr = document.getElementById('formQr')
-formQr.addEventListener('submit', generateQr)
-
-const commandGenerateQr = document.getElementById('commandGenerateQr')
-commandGenerateQr.addEventListener('click', generateQr)
+    const commandGenerateQr = document.getElementById('commandGenerateQr')
+    commandGenerateQr.addEventListener('click', generateQr)
+  })
+}())

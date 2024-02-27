@@ -1,5 +1,8 @@
 extends ../layout
 
+block head
+    script(src='/js/links/links.js')
+
 block content
     h2 #{settings.courseCode} (#{settings.deliveryId})
 
@@ -7,20 +10,29 @@ block content
 
     details(open)
         summary Survey
-        p
-            img(src=`/qr/${encodeURIComponent(settings.surveyUrl)}` alt=settings.surveyUrl)
-            br
-            a(href=settings.surveyUrl) #{settings.surveyUrl}
+        div#survey
+            p
+                img(src=`/qr/${encodeURIComponent(settings.surveyUrl)}` alt=settings.surveyUrl)
+                br
+                a(href=settings.surveyUrl) #{settings.surveyUrl}
+
+        button(onclick='jf.copyElementToClipboard("survey")') &#128203; Copy
 
     details(open)
         summary Lab Setup
-        h2 To access labs and redeem the lab key:
-        ul
-            li Go to <a href='aka.ms/esilab'>aka.ms/esilab</a>
-            li Login using a <strong>Microsoft account</string> (use a personal email)
-            li Enter the lab key: #{settings.labKey}<br>(You only need to do redeem the key once)
-        if settings.isCloudSlice
-            p Labs will be available for 180 days from activation. Each lab can be performed up to 10 times.
-        else
-            p Once the lab key is redeemed, you will be given credits to complete the lab. The credits will expire 30 days after the course ends.
-        p <strong>Make sure to redeem the lab key before the end of the course.</strong>
+        div#lab
+            h2 To redeem the lab key and access labs:
+            ul
+                li Go to <a href='aka.ms/esilab'>aka.ms/esilab</a>
+                li Login using a <strong>Microsoft account</strong> (personal email)
+                li Enter the lab key: <strong>#{settings.labKey}</strong>
+                    br
+                    | (You only need to do redeem the key once)
+            if settings.isCloudSlice
+                p Labs will be available for 180 days from activation. Each lab can be performed up to 10 times.
+            else
+                p Once the lab key is redeemed, you will be given credits to complete the lab. The credits will expire 30 days after they are redeemed.
+            p <strong>Be sure to redeem the lab key before the end of the course.</strong>
+
+        button(onclick='jf.copyElementToClipboard("lab")') &#128203; Copy
+

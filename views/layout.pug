@@ -2,8 +2,9 @@ doctype html
 html
   head
     title #{title} - Learnix
-    link(rel='stylesheet', href='/stylesheets/fa-regular.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
+
+    block head
   body
     if auth.loggedIn
       p Hello, #{auth.username} | #[a(href=`/auth/logout?returnUrl=${encodedUrl}`) Log Out]
