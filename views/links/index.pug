@@ -9,6 +9,20 @@ block content
     a(href='links/settings') Settings
 
     details(open)
+        summary Quick link
+        div#quickLinkGenerator(style={display:'none'})
+            div#quickLink
+                p
+                    img#quickLinkQr
+                    br
+                    a#quickLinkText
+
+            button#commandCopyQuickLink(type='button' onclick='jf.copyElementToClipboard("quickLink")') &#128203; Copy
+
+        p URL:&nbsp;
+            input#fieldQuickLink(oninput='jf.updateQuickLink()')
+
+    details(open)
         summary Survey
         div#survey
             p
@@ -16,7 +30,7 @@ block content
                 br
                 a(href=settings.surveyUrl) #{settings.surveyUrl}
 
-        button(onclick='jf.copyElementToClipboard("survey")') &#128203; Copy
+        button(type='button' onclick='jf.copyElementToClipboard("survey")') &#128203; Copy
 
     details(open)
         summary Lab Setup
@@ -34,5 +48,5 @@ block content
                 p Once the lab key is redeemed, you will be given credits to complete the lab. The credits will expire 30 days after they are redeemed.
             p <strong>Be sure to redeem the lab key before the end of the course.</strong>
 
-        button(onclick='jf.copyElementToClipboard("lab")') &#128203; Copy
+        button(type='button' onclick='jf.copyElementToClipboard("lab")') &#128203; Copy
 
