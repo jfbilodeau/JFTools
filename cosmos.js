@@ -54,10 +54,62 @@ async function writeItem(containerId, item) {
   await container.items.upsert(item)
 }
 
+async function deleteItem(containerId, partitionKey, itemId) {
+  const container = await getContainer(containerId)
+
+  await container.item(itemId, partitionKey).delete()
+}
+
 export async function getSettings (username) {
   return await getItem('settings', username)
 }
 
 export async function saveSettings (settings) {
   await writeItem('settings', settings)
+}
+
+export async function getPrivateLinks (username) {
+  const links = await getItem('privateLinks', username)
+
+  if (links.id === undefined) {
+    // Links are not initialized. Create empty links object.
+    links.id = username
+    links.links = []
+  }
+
+  return links
+}
+
+export async function savePrivateLinks(links) {
+  await writeItem('privateLinks', links)
+}
+
+export async function addPrivateLink(username, label, url) {
+  const links = await getPrivateLinks(username)
+
+  const link = {
+    label,
+    url
+  }
+
+  links.links.push(link)
+
+  const response = await writeItem('privateLinks', link)
+}
+
+export async function updatePrivateLink(username, index, label, url) {
+  const links = await getPrivateLinks(username)
+
+  links.links[index].label = label
+  links.links[index].url = url
+
+  await writeItem('privateLinks', links)
+}
+
+export async function deletePrivateLink(username, index) {
+  const links = await getPrivateLinks(username)
+
+  links.links.splice(index, 1)
+
+  await writeItem('privateLinks', links)
 }

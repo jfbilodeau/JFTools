@@ -48,3 +48,14 @@ block content
 
         button(type='button' onclick='jf.copyElementToClipboard("lab")') &#128203; Copy
 
+    details(open)
+        summary My links
+        div#divPrivateLinks
+
+        h2 Create new link
+        form#formAddLink
+            span Label:&nbsp;
+            input#fieldPrivateLinkName(type='label' placeholder='Label' required)
+            span URL:&nbsp;
+            input#fieldPrivateLinkUrl(type='url' placeholder='URL' required)
+            button#commandAddLink(type='button' onclick='jf.addPrivateLink()') Add

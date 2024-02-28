@@ -12,7 +12,10 @@ import indexRouter from './routes/index.js'
 import authRouter from './routes/auth.js'
 import kcRouter from "./routes/kc.js"
 import qrRouter from "./routes/qr.js"
-import settingsRouter from "./routes/links.js"
+import linksRouter from "./routes/links.js"
+
+// APIs
+import linksApiRouter from './routes/api/links.js'
 
 const app = express()
 
@@ -47,7 +50,9 @@ app.use('/', indexRouter)
 app.use('/auth', authRouter)
 app.use('/kc', kcRouter)
 app.use('/qr', qrRouter)
-app.use('/links', settingsRouter)
+app.use('/links', linksRouter)
+
+app.use('/api/links', linksApiRouter)
 
 // Register locals
 // catch 404 and forward to error handler
