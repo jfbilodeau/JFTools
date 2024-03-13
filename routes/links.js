@@ -11,6 +11,12 @@ router.get('/', auth.authenticated, async function (req, res, next) {
 
   const settings = await cosmos.getSettings(username)
 
+  if (!settings.courseCode) {
+    // No course code. Redirect to settings
+    res.redirect('/links/settings')
+    return
+  }
+
   const surveyQrDataUrl = await QRCode.toDataURL(settings.surveyUrl)
 
   res.render('links/index', { title: `Links`, settings, surveyQrDataUrl })

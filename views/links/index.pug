@@ -4,9 +4,13 @@ block head
     script(src='/js/links/links.js')
 
 block content
-    h2 #{settings.courseCode} (#{settings.deliveryId})
+    h2
+        span#courseCode= settings.courseCode
+        | &nbsp;(
+        span#deliverId= settings.deliveryId
+        | )
 
-    a(href='links/settings') Settings
+    a(href='/links/settings') Settings
 
     details(open)
         summary Quick link
@@ -53,9 +57,9 @@ block content
         div#divPrivateLinks
 
         h2 Create new link
-        form#formAddLink
+        form#formAddPrivateLink(onsubmit='jf.addPrivateLink(event)')
             span Label:&nbsp;
-            input#fieldPrivateLinkName(type='label' placeholder='Label' required)
+            input#fieldPrivateLinkLabel(type='text' placeholder='Label' required)
             span URL:&nbsp;
             input#fieldPrivateLinkUrl(type='url' placeholder='URL' required)
-            button#commandAddLink(type='button' onclick='jf.addPrivateLink()') Add
+            button#commandAddLink(type='submit') Add

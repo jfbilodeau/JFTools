@@ -13,18 +13,18 @@ async function getDatabase() {
     database = result.database
 
     await database.containers.createIfNotExists({
-      id: "settings",
-      partitionKey: "/username",
+      id: `settings`,
+      partitionKey: `/username`,
     })
 
     await database.containers.createIfNotExists({
-      id: "privateLinks",
-      partitionKey: "/username",
+      id: `privateLinks`,
+      partitionKey: `/username`,
     })
 
     await database.containers.createIfNotExists({
-      id: "publicLinks",
-      partitionKey: "/courseId",
+      id: `publicLinks`,
+      partitionKey: `/courseCode`
     })
   }
 
@@ -48,6 +48,16 @@ async function getItem(containerId, itemId) {
   return item ?? {}
 }
 
+async function queryItem(containerId, query) {
+  const container = await getContainer(containerId)
+
+  const response = await container.items.query(query).fetchAll()
+
+  const item = response.resources
+
+  return item ?? {}
+}
+
 async function writeItem(containerId, item) {
   const container = await getContainer(containerId)
 
@@ -68,13 +78,14 @@ export async function saveSettings (settings) {
   await writeItem('settings', settings)
 }
 
-export async function getPrivateLinks (username) {
-  const links = await getItem('privateLinks', username)
+export async function getPrivateLinks (username, courseCode) {
+  let query = `SELECT * FROM c WHERE c.id = '${courseCode}' AND c.username = '${username}'`
+  const result = await queryItem('privateLinks', query)
 
-  if (links.id === undefined) {
-    // Links are not initialized. Create empty links object.
-    links.id = username
-    links.links = []
+  let links = result[0] ?? {
+    id: courseCode,
+    username,
+    links: [],
   }
 
   return links
@@ -84,32 +95,3 @@ export async function savePrivateLinks(links) {
   await writeItem('privateLinks', links)
 }
 
-export async function addPrivateLink(username, label, url) {
-  const links = await getPrivateLinks(username)
-
-  const link = {
-    label,
-    url
-  }
-
-  links.links.push(link)
-
-  const response = await writeItem('privateLinks', link)
-}
-
-export async function updatePrivateLink(username, index, label, url) {
-  const links = await getPrivateLinks(username)
-
-  links.links[index].label = label
-  links.links[index].url = url
-
-  await writeItem('privateLinks', links)
-}
-
-export async function deletePrivateLink(username, index) {
-  const links = await getPrivateLinks(username)
-
-  links.links.splice(index, 1)
-
-  await writeItem('privateLinks', links)
-}
