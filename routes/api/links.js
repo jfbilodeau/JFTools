@@ -28,13 +28,22 @@ router.post('/private/:courseCode', auth.authenticated, async function (req, res
 
   const username = auth.getUsername(req)
 
-  const links = await cosmos.getPrivateLinks(username, courseCode)
+  const links = []
 
-  const newLinks = req.body.links
+  for (const link of req.body.links) {
+    links.push({
+      label: link.label,
+      url: link.url,
+    })
+  }
 
-  links.links = newLinks
+  const privateLinks = {
+    id: courseCode,
+    username,
+    links,
+  }
 
-  await cosmos.savePrivateLinks(links)
+  await cosmos.savePrivateLinks(privateLinks)
 
   res.status(200).send()
 })

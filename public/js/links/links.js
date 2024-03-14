@@ -100,7 +100,7 @@
 
     const thLabel = document.createElement(`th`)
 
-    thLabel.innerHTML = `Name`
+    thLabel.innerHTML = `Label`
 
     tr.appendChild(thLabel)
 

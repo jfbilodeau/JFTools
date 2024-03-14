@@ -30,6 +30,7 @@ block content
         div#survey
             p
                 img(src=surveyQrDataUrl alt=settings.surveyUrl).qr
+                br
                 a(href=settings.surveyUrl) #{settings.surveyUrl}
 
         button(type='button' onclick='jf.copyElementToClipboard("survey")') &#128203; Copy
