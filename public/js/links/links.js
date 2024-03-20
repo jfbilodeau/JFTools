@@ -41,6 +41,9 @@
   jf.addPrivateLink = async function(event) {
     event.preventDefault()
 
+    // In case JF Tools is opened in more than one tab, we want to make sure we're using the latest data
+    await jf.getPrivateLinks()
+
     let formAddPrivateLink = document.getElementById(`formAddPrivateLink`)
     let fieldPrivateLinkLabel = document.getElementById(`fieldPrivateLinkLabel`)
     let fieldPrivateLinkUrl = document.getElementById(`fieldPrivateLinkUrl`)
@@ -193,6 +196,14 @@
   }
 
   jf.deleteLink = async function(index) {
+    // In case JF Tools is opened in more than one tab, we want to make sure we're using the latest data
+    await jf.getPrivateLinks()
+
+    if (index < 0 || index >= jf.privateLinks.links.length) {
+      alert('Link no longer exists. It might have been deleted in another tab.')
+
+      return
+    }
     const label = jf.privateLinks.links[index].label
     const url = jf.privateLinks.links[index].url
 
@@ -206,6 +217,9 @@
   }
 
   jf.moveLinkUp = async function(index) {
+    // In case JF Tools is opened in more than one tab, we want to make sure we're using the latest data
+    await jf.getPrivateLinks()
+
     if (index > 0) {
       const link = jf.privateLinks.links[index]
       jf.privateLinks.links.splice(index, 1)
@@ -216,6 +230,9 @@
   }
 
   jf.moveLinkDown = async function(index) {
+    // In case JF Tools is opened in more than one tab, we want to make sure we're using the latest data
+    await jf.getPrivateLinks()
+
     if (index < jf.privateLinks.links.length - 1) {
       const link = jf.privateLinks.links[index]
       jf.privateLinks.links.splice(index, 1)
