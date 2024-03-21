@@ -36,6 +36,7 @@ router.post('/settings', auth.authenticated, async function (req, res, next) {
   const settings = {
     id: username,
     courseCode: req.body.courseCode,
+    language: req.body.language,
     deliveryId: req.body.deliveryId,
     surveyUrl: req.body.surveyUrl,
     labKey: req.body.labKey,

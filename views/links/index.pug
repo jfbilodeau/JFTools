@@ -37,19 +37,35 @@ block content
 
     details(open)
         summary Lab Setup
-        div#lab
-            h2 To redeem the lab key and access labs:
-            ul
-                li Go to <a href='https://aka.ms/esilab'>aka.ms/esilab</a>
-                li Login using a <strong>Microsoft account</strong> (personal email)
-                li Enter the lab key: <strong>#{settings.labKey}</strong>
-                    br
-                    | (You only need to do redeem the key once)
-            if settings.isCloudSlice
-                p Labs will be available for 180 days from activation. Each lab can be performed up to 10 times.
-            else
-                p Once the lab key is redeemed, you will be given credits to complete the lab. The credits will expire 30 days after they are redeemed.
-            p <strong>Be sure to redeem the lab key before the end of the course.</strong>
+        case settings.language
+            when 'fr'
+                div#lab
+                    h2 Pour récupérer la clé du laboratoire et accéder aux travaux pratiques :
+                    ul
+                        li Rendez-vous sur <a href='https://aka.ms/esilab'>aka.ms/esilab</a>
+                        li Connectez-vous avec un <strong>compte Microsoft</strong> (adresse courriel personnelle)
+                        li Saisissez la clé du laboratoire : <strong>#{settings.labKey}</strong>
+                            br
+                            | (Vous n'avez besoin de récupérer la clé qu'une seule fois)
+                    if settings.isCloudSlice
+                        p Les travaux pratiques seront disponibles pendant 180 jours à compter de l'activation. Chaque laboratoire peut être effectué jusqu'à 10 fois.
+                    else
+                        p Une fois la clé du laboratoire récupérée, vous recevrez des crédits pour terminer le laboratoire. Les crédits expireront 30 jours après leur activation.
+                    p <strong>Il est essentiel d’activer la clé du laboratoire avant la fin du cours.</strong>
+            default
+                div#lab
+                    h2 To redeem the lab key and access labs:
+                    ul
+                        li Go to <a href='https://aka.ms/esilab'>aka.ms/esilab</a>
+                        li Login using a <strong>Microsoft account</strong> (personal email)
+                        li Enter the lab key: <strong>#{settings.labKey}</strong>
+                            br
+                            | (You only need to do redeem the key once)
+                    if settings.isCloudSlice
+                        p Labs will be available for 180 days from activation. Each lab can be performed up to 10 times.
+                    else
+                        p Once the lab key is redeemed, you will be given credits to complete the lab. The credits will expire 30 days after they are redeemed.
+                    p <strong>Be sure to redeem the lab key before the end of the course.</strong>
 
         button(type='button' onclick='jf.copyElementToClipboard("lab")') &#128203; Copy
 

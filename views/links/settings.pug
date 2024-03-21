@@ -14,6 +14,13 @@ block content
                         input(type="text" name="courseCode" id="fieldCourseCode" value=settings.courseCode required)
                 tr
                     td
+                        label(for='fieldLanguage') Language:
+                    td
+                        select(name="language" id="fieldLanguage")
+                            option(value="en" selected=settings.language=='en') English
+                            option(value="fr" selected=settings.language=='fr') French
+                tr
+                    td
                         label(for='fieldDeliveryId') Delivery ID:
                     td
                         input(type="text" name="deliveryId" id="fieldDeliveryId" value=settings.deliveryId)
