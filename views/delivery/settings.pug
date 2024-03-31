@@ -8,39 +8,63 @@ block content
             legend Course settings
             table
                 tr
-                    td
+                    th
                         label(for='fieldCourseCode') Course code:
                     td
                         input(type="text" name="courseCode" id="fieldCourseCode" value=settings.courseCode required)
                 tr
-                    td
+                    th
                         label(for='fieldLanguage') Language:
                     td
                         select(name="language" id="fieldLanguage")
                             option(value="en" selected=settings.language=='en') English
                             option(value="fr" selected=settings.language=='fr') French
                 tr
-                    td
+                    th
                         label(for='fieldDeliveryId') Delivery ID:
                     td
                         input(type="text" name="deliveryId" id="fieldDeliveryId" value=settings.deliveryId)
                 tr
-                    td
+                    th
                         label(for='fieldSurveyUrl') Survey URL:
                     td
                         input(type="text" name="surveyUrl" id="fieldSurveyUrl" value=settings.surveyUrl)
                 tr
-                    td
+                    th
                         label(for='fieldLabKey') Lab key:
                     td
                         input(type="text" name="labKey" id="fieldLabKey" value=settings.labKey)
                 tr
-                    td
+                    th
                         label(for='fieldIsCloudSlice') Cloud Slice lab:
                     td
                         input(type="checkbox" name="isCloudSlice" id="fieldIsCloudSlice" checked=settings.isCloudSlice)
+        fieldset
+            legend Azure OpenAI settings
+            table
+                tr
+                    th
+                        label(for='openAiUrl') OpenAI URL:
+                    td
+                        input(type="text" name="openAiUrl" id="openAiUrl" value=settings.openAiUrl)
+                tr
+                    th
+                        label(for='openAiKey') OpenAI Key:
+                    td
+                        input(type="password" name="openAiKey" id="openAiKey" value=settings.openAiKey)
+                tr
+                    th
+                        label(for='openAiDeployment') OpenAI Deployment Name:
+                    td
+                        input(type="text" name="openAiDeployment" id="openAiDeployment" value=settings.openAiDeployment)
+
         p
             button(type="submit") Save
 
+    h2 Courses
+    ul
+        each course in courses
+            li=course.name
+
     p
-        a(href='/links') Back to course
+        a(href='/delivery') Back to course

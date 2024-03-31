@@ -10,14 +10,19 @@ input[type="text"], input[type="password"], input[type="search"] {
   width: 40em;
 }
 
+details {
+  border: darkgrey 1px solid;
+}
+
 img.qr {
   display: block;
+}
+
+th {
+  text-align: left;
 }
 
 .error {
   color: darkred;
 }
 
-details {
-  border: darkgrey 1px solid;
-}

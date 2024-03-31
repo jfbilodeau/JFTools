@@ -1,0 +1,18 @@
+block head
+    script(src='/js/delivery/delivery.js')
+
+block content
+    h2 Generate KlaxGen script
+    form(method='get')
+        p Describe your quiz:
+        p
+            textarea(name='description' autofocus rows='10' cols='80')
+            br
+        button(type='submit') Generate
+
+    if script
+        hr
+        h3 KlaxGen script
+        pre= script
+        button(type='button' onclick='jf.copyElementToClipboard("script")') &#128203; Copy
+        button(type='button' onclick='jf.downloadElement("script")') &#128194; Download

@@ -1,7 +1,7 @@
 extends ../layout
 
 block head
-    script(src='/js/links/links.js')
+    script(src='/js/delivery/delivery.js')
 
 block content
     h2
@@ -10,10 +10,11 @@ block content
         span#deliverId= settings.deliveryId
         | )
 
-    a(href='/links/settings') Settings
+    a(href='/delivery/settings') Settings |
+    a(href='/delivery/genquiz') Generate quiz
 
     details(open)
-        summary Quick link
+        summary Quick QR link
         div#quickLinkGenerator(style={display:'none'})
             div#quickLink
                 p

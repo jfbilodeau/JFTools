@@ -55,7 +55,7 @@ async function queryItem(containerId, query) {
 
   const item = response.resources
 
-  return item ?? {}
+  return item ?? []
 }
 
 async function writeItem(containerId, item) {
@@ -95,3 +95,10 @@ export async function savePrivateLinks(links) {
   await writeItem('privateLinks', links)
 }
 
+export async function getPrivateLinkLists(username) {
+  let query = `SELECT c.id as name FROM c WHERE c.username = '${username}'`
+
+  const result = await queryItem('privateLinks', query)
+
+  return result
+}
