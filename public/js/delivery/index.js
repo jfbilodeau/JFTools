@@ -1,18 +1,5 @@
-// import * as QRCode from 'https://cdn.jsdelivr.net/npm/node-qrcode@0.0.4/index.min.js'
-
 (function() {
-  jf = {}
-
-  jf.copyElementToClipboard = async function (elementId) {
-    const element = document.getElementById(elementId)
-
-    const range = document.createRange()
-    range.selectNode(element)
-    window.getSelection().removeAllRanges()
-    window.getSelection().addRange(range)
-    document.execCommand('copy')
-    window.getSelection().removeAllRanges()
-  }
+  const jf = window.jf || {}
 
   jf.updateQuickLink = async function() {
     const quickLinkGenerator = document.getElementById(`quickLinkGenerator`)
