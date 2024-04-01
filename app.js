@@ -15,7 +15,7 @@ import qrRouter from "./routes/qr.js"
 import deliveryRouter from "./routes/delivery.js"
 
 // APIs
-import linksApiRouter from './routes/api/delivery.js'
+import deliveryApiRouter from './routes/api/delivery.js'
 
 const app = express()
 
@@ -52,7 +52,7 @@ app.use('/kc', kcRouter)
 app.use('/qr', qrRouter)
 app.use('/delivery', deliveryRouter)
 
-app.use('/api/delivery', linksApiRouter)
+app.use('/api/delivery', deliveryApiRouter)
 
 // Register locals
 // catch 404 and forward to error handler

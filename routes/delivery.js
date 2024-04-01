@@ -2,7 +2,7 @@ import express from 'express'
 import * as auth from '../auth.js'
 import * as cosmos from '../cosmos.js'
 import * as QRCode from 'qrcode'
-import * as openai from ''
+// import * as openai from ''
 
 const router = express.Router();
 
@@ -14,7 +14,7 @@ router.get('/', auth.authenticated, async function (req, res, next) {
 
   if (!settings.courseCode) {
     // No course code. Redirect to settings
-    res.redirect('/links/settings')
+    res.redirect('/delivery/settings')
     return
   }
 

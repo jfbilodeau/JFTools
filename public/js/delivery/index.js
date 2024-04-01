@@ -74,7 +74,7 @@
   }
 
   jf.saveAndUpdatePrivateLinks = async function() {
-    const response = await fetch(`/api/links/private/${jf.courseCode}`, {
+    const response = await fetch(`/api/delivery/private/${jf.courseCode}`, {
       method: `POST`,
       headers: {
         'Content-Type': `application/json`
@@ -86,7 +86,7 @@
   }
 
   jf.getPrivateLinks = async function() {
-    const response = await fetch(`/api/links/private/${jf.courseCode}`)
+    const response = await fetch(`/api/delivery/private/${jf.courseCode}`)
     jf.privateLinks = await response.json()
 
     const privateLinks = document.getElementById(`divPrivateLinks`)
