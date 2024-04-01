@@ -1,21 +1,33 @@
-body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
 a {
   /*color: #00B7FF;*/
 }
 
-input[type="text"], input[type="password"], input[type="search"] {
-  width: 40em;
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #CCE8FE;
 }
 
 details {
   border: darkgrey 1px solid;
 }
 
+details {
+  margin-bottom: .5em;
+}
+
+details > summary {
+  font-weight: bold;
+  font-size: 125%;
+  color: white;
+  background-color: #4bb3ff;
+}
+
 img.qr {
   display: block;
+}
+
+input[type="text"], input[type="password"], input[type="search"] {
+  width: 40em;
 }
 
 th {

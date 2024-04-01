@@ -11,9 +11,6 @@ block content
         span#deliverId= settings.deliveryId
         | )
 
-    a(href='/delivery/settings') Settings |
-    a(href='/delivery/genquiz') Generate quiz
-
     details(open)
         summary Quick QR link
         div#quickLinkGenerator(style={display:'none'})
@@ -75,10 +72,23 @@ block content
         summary My links
         div#divPrivateLinks
 
-        h2 Create new link
+        h3 Create new link
         form#formAddPrivateLink(onsubmit='jf.addPrivateLink(event)')
             span Label:&nbsp;
             input#fieldPrivateLinkLabel(type='text' placeholder='Label' required)
             span URL:&nbsp;
             input#fieldPrivateLinkUrl(type='url' placeholder='URL' required)
             button#commandAddLink(type='submit') Add
+
+    details(open)
+        summary Global Links
+        div#divGlobalLinks
+
+    details
+        summary Tools and Settings
+        ul
+        li
+            a(href='/delivery/genquiz') Generate quiz
+        li
+            a(href='/delivery/settings') Settings |
+

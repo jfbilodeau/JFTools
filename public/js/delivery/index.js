@@ -77,98 +77,8 @@
     jf.privateLinks = await response.json()
 
     const privateLinks = document.getElementById(`divPrivateLinks`)
-    while (privateLinks.firstChild) {
-      privateLinks.removeChild(privateLinks.firstChild)
-    }
 
-    const table = document.createElement(`table`)
-    table.style.border = `1px solid black`
-
-    const thead = document.createElement(`thead`)
-
-    const tr = document.createElement(`tr`)
-
-    const thLabel = document.createElement(`th`)
-
-    thLabel.innerHTML = `Label`
-
-    tr.appendChild(thLabel)
-
-    const thUrl = document.createElement(`th`)
-
-    thUrl.innerHTML = `URL`
-
-    tr.appendChild(thUrl)
-
-    const thActions = document.createElement(`th`)
-    tr.appendChild(thActions)
-
-    thead.appendChild(tr)
-
-    table.appendChild(thead)
-
-    const tbody = document.createElement(`tbody`)
-
-    for (const index in jf.privateLinks.links) {
-      const link = jf.privateLinks.links[index]
-
-      const tr = document.createElement(`tr`)
-
-      const tdLabel = document.createElement(`td`)
-
-      tdLabel.innerHTML = link.label
-
-      tr.appendChild(tdLabel)
-
-      const tdUrl = document.createElement(`td`)
-
-      tdUrl.innerHTML = `<a href=${link.url}>${link.url}</a>`
-
-      tr.appendChild(tdUrl)
-
-      const tdActions = document.createElement(`td`)
-
-      const buttonCopy = document.createElement(`button`)
-      buttonCopy.innerHTML = `&#128203;`
-      buttonCopy.onclick = function() {
-        jf.copyLink(index)
-      }
-      tdActions.appendChild(buttonCopy)
-
-      const buttonDelete = document.createElement(`button`)
-      buttonDelete.innerHTML = `&#10060;`
-      buttonDelete.onclick = function() {
-        jf.deleteLink(index)
-      }
-      tdActions.appendChild(buttonDelete)
-
-      if (index > 0) {
-        const buttonMoveUp = document.createElement(`button`)
-        buttonMoveUp.innerHTML = `&#11014;`
-        buttonMoveUp.onclick = function () {
-          jf.moveLinkUp(index)
-        }
-        tdActions.appendChild(buttonMoveUp)
-      }
-
-      const buttonMoveDown = document.createElement(`button`)
-
-      if (index < jf.privateLinks.links.length - 1) {
-        buttonMoveDown.innerHTML = `&#11015;`
-        buttonMoveDown.onclick = function () {
-          jf.moveLinkDown(index)
-        }
-        tdActions.appendChild(buttonMoveDown)
-      }
-
-      tr.appendChild(tdActions)
-
-      tbody.appendChild(tr)
-    }
-
-    table.appendChild(tbody)
-
-    privateLinks.appendChild(table)
+    generateLinksTable(privateLinks, jf.privateLinks.links)
   }
 
   jf.copyLink = async function(index) {
@@ -236,4 +146,100 @@
 
     await jf.getPrivateLinks()
   })
+
+  // Private section
+  function generateLinksTable (element, links) {
+    while (element.firstChild) {
+      element.removeChild(element.firstChild)
+    }
+
+    const table = document.createElement(`table`)
+    table.style.border = `1px solid black`
+
+    const thead = document.createElement(`thead`)
+
+    const tr = document.createElement(`tr`)
+
+    const thLabel = document.createElement(`th`)
+
+    thLabel.innerHTML = `Label`
+
+    tr.appendChild(thLabel)
+
+    const thUrl = document.createElement(`th`)
+
+    thUrl.innerHTML = `URL`
+
+    tr.appendChild(thUrl)
+
+    const thActions = document.createElement(`th`)
+    tr.appendChild(thActions)
+
+    thead.appendChild(tr)
+
+    table.appendChild(thead)
+
+    const tbody = document.createElement(`tbody`)
+
+    for (const index in links) {
+      const link = links[index]
+
+      const tr = document.createElement(`tr`)
+
+      const tdLabel = document.createElement(`td`)
+
+      tdLabel.innerHTML = link.label
+
+      tr.appendChild(tdLabel)
+
+      const tdUrl = document.createElement(`td`)
+
+      tdUrl.innerHTML = `<a href=${link.url}>${link.url}</a>`
+
+      tr.appendChild(tdUrl)
+
+      const tdActions = document.createElement(`td`)
+
+      const buttonCopy = document.createElement(`button`)
+      buttonCopy.innerHTML = `&#128203;`
+      buttonCopy.onclick = function () {
+        links.copyLink(index)
+      }
+      tdActions.appendChild(buttonCopy)
+
+      const buttonDelete = document.createElement(`button`)
+      buttonDelete.innerHTML = `&#10060;`
+      buttonDelete.onclick = function () {
+        links.deleteLink(index)
+      }
+      tdActions.appendChild(buttonDelete)
+
+      if (index > 0) {
+        const buttonMoveUp = document.createElement(`button`)
+        buttonMoveUp.innerHTML = `&#11014;`
+        buttonMoveUp.onclick = function () {
+          links.moveLinkUp(index)
+        }
+        tdActions.appendChild(buttonMoveUp)
+      }
+
+      const buttonMoveDown = document.createElement(`button`)
+
+      if (index < links.length - 1) {
+        buttonMoveDown.innerHTML = `&#11015;`
+        buttonMoveDown.onclick = function () {
+          links.moveLinkDown(index)
+        }
+        tdActions.appendChild(buttonMoveDown)
+      }
+
+      tr.appendChild(tdActions)
+
+      tbody.appendChild(tr)
+    }
+
+    table.appendChild(tbody)
+
+    element.appendChild(table)
+  }
 }())
