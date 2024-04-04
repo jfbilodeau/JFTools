@@ -27,7 +27,7 @@ router.get('/login', async (req, res, next) => {
     scopes,
     redirectUri: process.env.JFTOOLS_AUTH_REDIRECT_URI,
     prompt: `select_account`,
-    state: req.query.returnUrl,
+    state: req.query.returnTo,
   }
 
   let authCodeUrl = await confidentialClientApplication.getAuthCodeUrl(authorizationUrlRequest)

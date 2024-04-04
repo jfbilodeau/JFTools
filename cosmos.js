@@ -23,8 +23,8 @@ async function getDatabase() {
     })
 
     await database.containers.createIfNotExists({
-      id: `publicLinks`,
-      partitionKey: `/courseCode`
+      id: `globalLinks`,
+      partitionKey: `/id`
     })
   }
 
@@ -102,3 +102,21 @@ export async function getPrivateLinkLists(username) {
 
   return result
 }
+
+export async function getGlobalLinks(username) {
+  let query = `SELECT * FROM c WHERE c.id = '${username}'`
+
+  const result = await queryItem('globalLinks', query)
+
+  const links = {
+    id: username,
+    links: result[0]?.links ?? [],
+  }
+
+  return links
+}
+
+export async function saveGlobalLinks(links) {
+  await writeItem('globalLinks', links)
+}
+

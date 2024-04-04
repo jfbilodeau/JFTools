@@ -7,7 +7,7 @@ html
     block head
   body
     if auth.loggedIn
-      p Hello, #{auth.username} | #[a(href=`/auth/logout?returnUrl=${encodedUrl}`) Log Out]
+      p Hello, #{auth.username} | #[a(href=`/auth/logout`) Log Out]
     else
       p
         a(href=`/auth/login?returnUrl=${encodedUrl}`) Log in

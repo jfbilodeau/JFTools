@@ -113,7 +113,7 @@
     }
   }
 
-  jf.moveLinkUp = async function(index) {
+  jf.movePrivateLinkUp = async function(index) {
     // In case JF Tools is opened in more than one tab, we want to make sure we're using the latest data
     await jf.getPrivateLinks()
 
@@ -126,7 +126,7 @@
     await jf.saveAndUpdatePrivateLinks()
   }
 
-  jf.moveLinkDown = async function(index) {
+  jf.movePrivateLinkDown = async function(index) {
     // In case JF Tools is opened in more than one tab, we want to make sure we're using the latest data
     await jf.getPrivateLinks()
 
@@ -139,12 +139,22 @@
     await jf.saveAndUpdatePrivateLinks()
   }
 
+  jf.getGlobalLink = async function() {
+    const response = await fetch(`/api/delivery/links`)
+    jf.globalLinks = await response.json()
+
+    const globalLinks = document.getElementById(`divGlobalLinks`)
+
+    generateLinksTable(globalLinks, jf.globalLinks.links)
+  }
+
   window.jf = jf
 
   window.addEventListener('load', async function () {
     jf.courseCode = document.getElementById(`courseCode`).innerText
 
     await jf.getPrivateLinks()
+    await jf.getGlobalLink()
   })
 
   // Private section
@@ -202,23 +212,23 @@
 
       const buttonCopy = document.createElement(`button`)
       buttonCopy.innerHTML = `&#128203;`
-      buttonCopy.onclick = function () {
-        links.copyLink(index)
+      buttonCopy.onclick = async function () {
+        await jf.copyLink(index)
       }
       tdActions.appendChild(buttonCopy)
 
       const buttonDelete = document.createElement(`button`)
       buttonDelete.innerHTML = `&#10060;`
-      buttonDelete.onclick = function () {
-        links.deleteLink(index)
+      buttonDelete.onclick = async function () {
+        await jf.deleteLink(index)
       }
       tdActions.appendChild(buttonDelete)
 
       if (index > 0) {
         const buttonMoveUp = document.createElement(`button`)
         buttonMoveUp.innerHTML = `&#11014;`
-        buttonMoveUp.onclick = function () {
-          links.moveLinkUp(index)
+        buttonMoveUp.onclick = async function () {
+          await jf.movePrivateLinkUp(index)
         }
         tdActions.appendChild(buttonMoveUp)
       }
@@ -227,8 +237,8 @@
 
       if (index < links.length - 1) {
         buttonMoveDown.innerHTML = `&#11015;`
-        buttonMoveDown.onclick = function () {
-          links.moveLinkDown(index)
+        buttonMoveDown.onclick = async function () {
+          await jf.movePrivateLinkDown(index)
         }
         tdActions.appendChild(buttonMoveDown)
       }
