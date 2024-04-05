@@ -13,8 +13,8 @@
       quickLinkGenerator.style.display = `none`
     } else {
       quickLinkGenerator.style.display = `block`
-      // const qrCodeUrl = await jf.qrcode.makeCode(quickLink)
       const encodedQuickLink = encodeURIComponent(quickLink)
+      console.log(encodedQuickLink)
       const qrCodeUrl = `/qr/${encodedQuickLink}?type=url`
       const response = await fetch(qrCodeUrl)
       const qrCodeDataUrl = await response.text()
