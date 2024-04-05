@@ -20,7 +20,7 @@ router.get('/', auth.authenticated, async function (req, res, next) {
 
   const surveyQrDataUrl = await QRCode.toDataURL(settings.surveyUrl)
 
-  res.render('delivery/index', { title: `Links`, settings, surveyQrDataUrl })
+  res.render('delivery/index', { title: `Delivery`, settings, surveyQrDataUrl })
 })
 
 router.get('/genquiz', auth.authenticated, async function (req, res, next) {
